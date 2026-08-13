@@ -1,0 +1,78 @@
+.app {
+  --color-primary: #10b981;
+  --color-primary-hover: #059669;
+  --color-background: #f6f8f7;
+  --color-surface: #ffffff;
+  --color-surface-secondary: #f0f4f2;
+  --color-border: #dfe7e3;
+  --color-text: #18211d;
+  --color-text-secondary: #66736d;
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text);
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.app[data-theme="dark"] {
+  --color-primary: #34d399;
+  --color-primary-hover: #6ee7b7;
+  --color-background: #101512;
+  --color-surface: #171d19;
+  --color-surface-secondary: #1d2520;
+  --color-border: #2b3730;
+  --color-text: #edf3ef;
+  --color-text-secondary: #9caaa2;
+}
+
+.container {
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+  padding-block: 2rem;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.insight {
+  grid-column: span 12;
+}
+
+.trends {
+  grid-column: span 8;
+  min-height: 22rem;
+}
+
+.moodform {
+  grid-column: span 4;
+  min-height: 22rem;
+}
+
+.insight h2,
+.trends h2,
+.moodform h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.insight p,
+.trends p,
+.moodform p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .trends,
+  .moodform {
+    grid-column: span 12;
+  }
+}
