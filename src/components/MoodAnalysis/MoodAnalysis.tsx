@@ -1,7 +1,7 @@
-import { MOOD_OUTLOOK_MESSAGES } from "../../constants/mood";
-import { useMoodContext } from "../../context/hooks/useMoodContext";
-import { getMoodOutlook } from "../../utils/mood";
-import { Widget } from "../Widget/Widget";
+import { MOOD_OUTLOOK_MESSAGES } from "@/constants/mood";
+import { useMoodContext } from "@/context/hooks/useMoodContext";
+import { getMoodOutlook } from "@/utils/mood";
+import { Widget } from "@/shared/components/Widget/Widget";
 import styles from "./MoodAnalysis.module.css";
 
 export const MoodAnalysis = () => {

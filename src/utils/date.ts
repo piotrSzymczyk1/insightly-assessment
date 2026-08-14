@@ -5,3 +5,8 @@ export const formatLocalDate = (date: Date): string => {
 
   return `${year}-${month}-${day}`;
 };
+export const formatShortDate = (date: string): string => {
+  const [year, month, day] = date.split("-");
+
+  return `${day}.${month}.${year.slice(-2)}`;
+};

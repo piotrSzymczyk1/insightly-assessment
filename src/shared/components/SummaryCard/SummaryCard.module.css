@@ -12,3 +12,14 @@
   font-size: 1.25rem;
   line-height: 1;
 }
+.value[data-mood="positive"] {
+  color: var(--mood-positive);
+}
+
+.value[data-mood="neutral"] {
+  color: var(--mood-neutral);
+}
+
+.value[data-mood="negative"] {
+  color: var(--mood-negative);
+}

@@ -4,8 +4,21 @@
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 2rem;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--box-shadow-default);
+  padding: 1rem;
+}
+.header[data-mood="happy"] {
+  box-shadow: var(--box-shadow-happy);
 }
 
+.header[data-mood="neutral"] {
+  box-shadow: var(--box-shadow-neutral);
+}
+
+.header[data-mood="sad"] {
+  box-shadow: var(--box-shadow-sad);
+}
 .title {
   margin: 0;
   color: var(--color-text);

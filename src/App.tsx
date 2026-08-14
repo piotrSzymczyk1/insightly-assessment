@@ -1,9 +1,10 @@
 import { Header } from "./components/Header/Header";
-import { Widget } from "./components/Widget/Widget";
-import styles from "./App.module.css";
 import { DailyInsightsSummary } from "./components/DailyInsightsSummary/DailyInsightsSummary";
 import { MoodAnalysis } from "./components/MoodAnalysis/MoodAnalysis";
 import { useThemeContext } from "./context/hooks/useThemeContext";
+import { MoodTracker } from "./components/MoodTracker/MoodTracker";
+import { MoodTrends } from "./components/MoodTrends/MoodTrends";
+import styles from "./App.module.css";
 
 function App() {
   const { theme } = useThemeContext();
@@ -15,15 +16,8 @@ function App() {
         <main className={styles.dashboard}>
           <DailyInsightsSummary />
           <MoodAnalysis />
-          <Widget className={styles.trends}>
-            <h2>Mood Trends</h2>
-            <p>Chart.</p>
-          </Widget>
-
-          <Widget className={styles.moodform}>
-            <h2>Mood Tracker</h2>
-            <p>Mood form.</p>
-          </Widget>
+          <MoodTrends />
+          <MoodTracker />
         </main>
       </div>
     </div>

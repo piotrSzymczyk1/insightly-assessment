@@ -1,16 +1,16 @@
-import { OUTLOOK_THRESHOLD } from "../constants/mood";
+import {
+  MoodLevel,
+  MoodOutlookConst,
+  MOODS,
+  OUTLOOK_THRESHOLD,
+} from "@/constants/mood";
 import type {
   MoodEntry,
   MoodOutlook,
-  MoodScore,
+  MoodScoreEntry,
   MoodType,
-} from "../types/mood";
+} from "@/types/mood";
 
-export const scoreToMood: Record<MoodScore, MoodType> = {
-  1: "sad",
-  2: "neutral",
-  3: "happy",
-};
 export const calculateMoodScore = (moodData: MoodEntry[]): number | null => {
   if (moodData.length === 0) {
     return null;
@@ -31,55 +31,44 @@ export const getMoodLevel = (score: number | null): MoodType | null => {
   }
 
   if (score >= 2.5) {
-    return "happy";
+    return MoodLevel.Happy;
   }
 
   if (score < 1.5) {
-    return "sad";
+    return MoodLevel.Sad;
   }
 
-  return "neutral";
+  return MoodLevel.Neutral;
 };
 export const getMoodIcon = (score: number | null): string => {
   const mood = getMoodLevel(score);
 
-  switch (mood) {
-    case "happy":
-      return "🙂";
-
-    case "neutral":
-      return "😐";
-
-    case "sad":
-      return "🙁";
-
-    default:
-      return "—";
-  }
+  return mood ? MOODS[mood].icon : "—";
 };
-export const getMoodOutlook = (moodData: MoodEntry[]): MoodOutlook => {
+export const getMoodOutlook = (moodData: MoodScoreEntry[]): MoodOutlook => {
   if (moodData.length < 2) {
-    return "neutral";
+    return MoodOutlookConst.Neutral;
   }
   const midpoint = Math.floor(moodData.length / 2);
 
   const firstHalf = moodData.slice(0, midpoint);
   const secondHalf = moodData.slice(midpoint);
 
-  const getAverage = (entries: MoodEntry[]) =>
+  const getAverage = (entries: MoodScoreEntry[]) =>
     entries.reduce((acc, value) => acc + value.score, 0) / entries.length;
 
   const firstAverage = getAverage(firstHalf);
   const secondAverage = getAverage(secondHalf);
+
   const difference = secondAverage - firstAverage;
 
   if (difference >= OUTLOOK_THRESHOLD) {
-    return "positive";
+    return MoodOutlookConst.Positive;
   }
 
   if (difference <= -OUTLOOK_THRESHOLD) {
-    return "negative";
+    return MoodOutlookConst.Negative;
   }
 
-  return "neutral";
+  return MoodOutlookConst.Neutral;
 };

@@ -1,8 +1,8 @@
-import { Widget } from "../Widget/Widget";
+import { Widget } from "@/shared/components/Widget/Widget";
 import styles from "./SummaryCard.module.css";
 import type { SummaryCardProps } from "./SummaryCard.types";
 
-export const SummaryCard = ({ icon, label, value }: SummaryCardProps) => {
+export const SummaryCard = ({ icon, label, value, mood }: SummaryCardProps) => {
   return (
     <Widget>
       <div className={styles.label}>
@@ -10,7 +10,9 @@ export const SummaryCard = ({ icon, label, value }: SummaryCardProps) => {
         <span>{label}</span>
       </div>
 
-      <strong className={styles.value}>{value}</strong>
+      <strong className={styles.value} data-mood={mood}>
+        {value}
+      </strong>
     </Widget>
   );
 };

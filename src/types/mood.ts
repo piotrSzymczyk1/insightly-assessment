@@ -1,14 +1,21 @@
-export type MoodType = "happy" | "neutral" | "sad";
+import type { MoodLevel, MoodOutlookConst, MOODS } from "@/constants/mood";
 
-export type MoodScore = 1 | 2 | 3;
+export type MoodType = (typeof MoodLevel)[keyof typeof MoodLevel];
+
+export type MoodScore = (typeof MOODS)[MoodType]["score"];
 
 export interface MoodEntry {
   date: string;
   mood: MoodType;
   score: MoodScore;
 }
+export interface MoodScoreEntry {
+  score: number;
+}
 export interface MockMood {
   mood: MoodType;
   score: MoodScore;
 }
-export type MoodOutlook = "positive" | "neutral" | "negative";
+
+export type MoodOutlook =
+  (typeof MoodOutlookConst)[keyof typeof MoodOutlookConst];
