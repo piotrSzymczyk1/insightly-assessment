@@ -1,6 +1,6 @@
-import type { MoodEntry, MoodType } from "../types/mood";
+import type { MoodEntry, MoodStatusType } from "../types/mood";
 
 export interface MoodContextValue {
   moodData: MoodEntry[];
-  saveMood: (mood: MoodType) => void;
+  saveMood: (mood: MoodStatusType) => void;
 }

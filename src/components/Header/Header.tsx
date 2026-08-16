@@ -10,7 +10,8 @@ export const Header = () => {
   const today = formatLocalDate(new Date());
 
   const todaysMood =
-    moodData.find((entry) => entry.date === today)?.mood ?? "neutral";
+    moodData.find((entry) => entry.date === today)?.status ?? "neutral";
+
   return (
     <header className={styles.header} data-mood={todaysMood}>
       <div>

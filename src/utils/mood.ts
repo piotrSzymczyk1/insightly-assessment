@@ -1,15 +1,5 @@
-import {
-  MoodLevel,
-  MoodOutlookConst,
-  MOODS,
-  OUTLOOK_THRESHOLD,
-} from "@/constants/mood";
-import type {
-  MoodEntry,
-  MoodOutlook,
-  MoodScoreEntry,
-  MoodType,
-} from "@/types/mood";
+import { MOODS, MoodStatus, TREND_THRESHOLD } from "@/constants/mood";
+import type { MoodEntry, MoodScoreEntry, MoodStatusType } from "@/types/mood";
 
 export const calculateMoodScore = (moodData: MoodEntry[]): number | null => {
   if (moodData.length === 0) {
@@ -20,34 +10,36 @@ export const calculateMoodScore = (moodData: MoodEntry[]): number | null => {
 
   return total / moodData.length;
 };
-export const getRandomMoodOutlook = (outlooks: MoodOutlook[]): MoodOutlook => {
-  const randomIndex = Math.floor(Math.random() * outlooks.length);
+export const getRandomMoodTrend = (
+  trends: MoodStatusType[],
+): MoodStatusType => {
+  const randomIndex = Math.floor(Math.random() * trends.length);
 
-  return outlooks[randomIndex];
+  return trends[randomIndex];
 };
-export const getMoodLevel = (score: number | null): MoodType | null => {
+export const getMoodStatus = (score: number | null): MoodStatusType | null => {
   if (score === null) {
     return null;
   }
 
   if (score >= 2.5) {
-    return MoodLevel.Happy;
+    return MoodStatus.Positive;
   }
 
   if (score < 1.5) {
-    return MoodLevel.Sad;
+    return MoodStatus.Negative;
   }
 
-  return MoodLevel.Neutral;
+  return MoodStatus.Neutral;
 };
 export const getMoodIcon = (score: number | null): string => {
-  const mood = getMoodLevel(score);
+  const status = getMoodStatus(score);
 
-  return mood ? MOODS[mood].icon : "—";
+  return status ? MOODS[status].icon : "—";
 };
-export const getMoodOutlook = (moodData: MoodScoreEntry[]): MoodOutlook => {
+export const getMoodTrend = (moodData: MoodScoreEntry[]): MoodStatusType => {
   if (moodData.length < 2) {
-    return MoodOutlookConst.Neutral;
+    return MoodStatus.Neutral;
   }
   const midpoint = Math.floor(moodData.length / 2);
 
@@ -62,13 +54,13 @@ export const getMoodOutlook = (moodData: MoodScoreEntry[]): MoodOutlook => {
 
   const difference = secondAverage - firstAverage;
 
-  if (difference >= OUTLOOK_THRESHOLD) {
-    return MoodOutlookConst.Positive;
+  if (difference >= TREND_THRESHOLD) {
+    return MoodStatus.Positive;
   }
 
-  if (difference <= -OUTLOOK_THRESHOLD) {
-    return MoodOutlookConst.Negative;
+  if (difference <= -TREND_THRESHOLD) {
+    return MoodStatus.Negative;
   }
 
-  return MoodOutlookConst.Neutral;
+  return MoodStatus.Neutral;
 };

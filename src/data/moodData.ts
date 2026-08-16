@@ -1,8 +1,8 @@
 import type { MoodTrendPoint } from "@/components/MoodTrends/MoodTrend.types";
 import { MOODS } from "@/constants/mood";
-import type { MoodEntry, MoodOutlook, MoodType } from "@/types/mood";
+import type { MoodEntry, MoodStatusType } from "@/types/mood";
 import { formatLocalDate } from "@/utils/date";
-import { getRandomMoodOutlook } from "@/utils/mood";
+import { getRandomMoodTrend } from "@/utils/mood";
 
 export const weeklyMoodData: MoodTrendPoint[] = [
   { label: "Week 1", score: 2.6 },
@@ -19,35 +19,51 @@ export const monthlyMoodData: MoodTrendPoint[] = [
   { label: "Jul", score: 1.3 },
   { label: "Aug", score: 1.6 },
 ];
-const mockMoods: Record<MoodOutlook, MoodType[]> = {
+const mockMoods: Record<MoodStatusType, MoodStatusType[]> = {
   positive: [
     "neutral",
     "neutral",
-    "happy",
+    "positive",
     "neutral",
-    "happy",
-    "happy",
-    "happy",
+    "positive",
+    "positive",
+    "positive",
   ],
-  neutral: ["sad", "happy", "neutral", "neutral", "neutral", "sad", "happy"],
-  negative: ["neutral", "neutral", "sad", "sad", "sad", "sad", "sad"],
+  neutral: [
+    "negative",
+    "positive",
+    "neutral",
+    "neutral",
+    "neutral",
+    "negative",
+    "positive",
+  ],
+  negative: [
+    "neutral",
+    "neutral",
+    "negative",
+    "negative",
+    "negative",
+    "negative",
+    "negative",
+  ],
 };
-const outlooks: MoodOutlook[] = ["positive", "neutral", "negative"];
+const trends: MoodStatusType[] = ["positive", "neutral", "negative"];
 
 export const createInitialMoodData = (): MoodEntry[] => {
-  const outlook = getRandomMoodOutlook(outlooks);
-  const moods = mockMoods[outlook];
+  const trend = getRandomMoodTrend(trends);
+  const moods = mockMoods[trend];
   const today = new Date();
 
-  return moods.map((mood, index) => {
+  return moods.map((status, index) => {
     const date = new Date(today);
 
     date.setDate(today.getDate() - (moods.length - 1 - index));
 
     return {
       date: formatLocalDate(date),
-      mood,
-      score: MOODS[mood].score,
+      status,
+      score: MOODS[status].score,
     };
   });
 };

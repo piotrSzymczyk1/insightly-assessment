@@ -1,9 +1,6 @@
-import { createContext, useState, type PropsWithChildren } from "react";
-import type { Theme, ThemeContextValue } from "./ThemeContext.types";
-
-export const ThemeContext = createContext<ThemeContextValue | undefined>(
-  undefined,
-);
+import { useState, type PropsWithChildren } from "react";
+import type { Theme } from "./ThemeContext.types";
+import { ThemeContext } from "./ThemeContext";
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [theme, setTheme] = useState<Theme>("light");

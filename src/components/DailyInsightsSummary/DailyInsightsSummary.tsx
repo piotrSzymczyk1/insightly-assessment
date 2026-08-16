@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { calculateMoodScore, getMoodIcon, getMoodOutlook } from "@/utils/mood";
+import { calculateMoodScore, getMoodIcon, getMoodTrend } from "@/utils/mood";
 import { SummaryCard } from "@/shared/components/SummaryCard/SummaryCard";
 import styles from "./DailyInsightsSummary.module.css";
 import { useMoodContext } from "@/context/hooks/useMoodContext";
@@ -12,7 +12,7 @@ export const DailyInsightsSummary = () => {
   const [tasksCompleted] = useState(createTasksCompleted);
 
   const moodScore = calculateMoodScore(moodData);
-  const moodOutlook = getMoodOutlook(moodData);
+  const moodTrend = getMoodTrend(moodData);
   const moodIcon = getMoodIcon(moodScore);
   return (
     <section className={styles.summary}>
@@ -20,13 +20,13 @@ export const DailyInsightsSummary = () => {
         icon="✓"
         label="Tasks Completed"
         value={tasksCompleted}
-        mood={moodOutlook}
+        mood={moodTrend}
       />
       <SummaryCard
         icon={moodIcon}
         label="Mood Score"
         value={moodScore !== null ? moodScore.toFixed(1) : "—"}
-        mood={moodOutlook}
+        mood={moodTrend}
       />
     </section>
   );

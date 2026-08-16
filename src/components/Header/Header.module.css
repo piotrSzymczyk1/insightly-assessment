@@ -8,16 +8,16 @@
   box-shadow: var(--box-shadow-default);
   padding: 1rem;
 }
-.header[data-mood="happy"] {
-  box-shadow: var(--box-shadow-happy);
+.header[data-mood="positive"] {
+  box-shadow: var(--box-shadow-positive);
 }
 
 .header[data-mood="neutral"] {
   box-shadow: var(--box-shadow-neutral);
 }
 
-.header[data-mood="sad"] {
-  box-shadow: var(--box-shadow-sad);
+.header[data-mood="negative"] {
+  box-shadow: var(--box-shadow-negative);
 }
 .title {
   margin: 0;

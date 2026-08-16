@@ -1,18 +1,14 @@
-import { createContext, useState, type PropsWithChildren } from "react";
 import { createInitialMoodData } from "@/data/moodData";
-import type { MoodEntry, MoodType } from "@/types/mood";
-import type { MoodContextValue } from "./MoodContext.types";
+import type { MoodEntry, MoodStatusType } from "@/types/mood";
 import { formatLocalDate } from "@/utils/date";
+import { useState, type PropsWithChildren } from "react";
+import { MoodContext } from "./MoodContext";
 import { MOODS } from "@/constants/mood";
-
-export const MoodContext = createContext<MoodContextValue | undefined>(
-  undefined,
-);
 
 export const MoodProvider = ({ children }: PropsWithChildren) => {
   const [moodData, setMoodData] = useState<MoodEntry[]>(createInitialMoodData);
 
-  const saveMood = (mood: MoodType) => {
+  const saveMood = (status: MoodStatusType) => {
     const today = formatLocalDate(new Date());
 
     setMoodData((currentMoodData) =>
@@ -20,8 +16,8 @@ export const MoodProvider = ({ children }: PropsWithChildren) => {
         entry.date === today
           ? {
               ...entry,
-              mood,
-              score: MOODS[mood].score,
+              status,
+              score: MOODS[status].score,
             }
           : entry,
       ),

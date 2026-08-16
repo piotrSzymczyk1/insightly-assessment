@@ -10,11 +10,11 @@ import { useMoodContext } from "@/context/hooks/useMoodContext";
 import { Widget } from "@/shared/components/Widget/Widget";
 import styles from "./MoodTrends.module.css";
 import { formatShortDate } from "@/utils/date";
-import { getMoodOutlook } from "@/utils/mood";
 import type { MoodTrendPoint, MoodTrendViewType } from "./MoodTrend.types";
 import { useState } from "react";
 import { monthlyMoodData, weeklyMoodData } from "@/data/moodData";
 import { MoodTrendView } from "@/constants/mood";
+import { getMoodTrend } from "@/utils/mood";
 
 export const MoodTrends = () => {
   const { moodData } = useMoodContext();
@@ -29,9 +29,8 @@ export const MoodTrends = () => {
     [MoodTrendView.Monthly]: monthlyMoodData,
   };
   const displayedData = trendData[view];
-  const moodOutlook = getMoodOutlook(displayedData);
-  console.log(moodOutlook);
-  const lineColor = `var(--mood-${moodOutlook})`;
+  const moodTrend = getMoodTrend(displayedData);
+  const lineColor = `var(--mood-${moodTrend})`;
   return (
     <Widget className={styles.trends}>
       <div className={styles.header}>

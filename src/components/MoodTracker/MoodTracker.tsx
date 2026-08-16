@@ -1,14 +1,14 @@
 import { useState, type SubmitEvent } from "react";
 import { useMoodContext } from "@/context/hooks/useMoodContext";
-import type { MoodType } from "@/types/mood";
 import { Widget } from "@/shared/components/Widget/Widget";
 import styles from "./MoodTracker.module.css";
 import { MOODS } from "@/constants/mood";
+import type { MoodStatusType } from "@/types/mood";
 
 export const MoodTracker = () => {
   const { saveMood } = useMoodContext();
 
-  const [selectedMood, setSelectedMood] = useState<MoodType | null>(null);
+  const [selectedMood, setSelectedMood] = useState<MoodStatusType | null>(null);
 
   const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,7 +30,7 @@ export const MoodTracker = () => {
           <legend className={styles.legend}>How are you feeling today?</legend>
 
           <div className={styles.options}>
-            {(Object.keys(MOODS) as MoodType[]).map((mood) => {
+            {(Object.keys(MOODS) as MoodStatusType[]).map((mood) => {
               const option = MOODS[mood];
 
               return (
